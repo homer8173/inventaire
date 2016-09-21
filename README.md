@@ -1,4 +1,4 @@
-Dolibarr Module Template (aka My Module)
+Dolibarr Module Template (inventaire)
 ========================================
 
 This is a full featured module template for Dolibarr.

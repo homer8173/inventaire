@@ -28,16 +28,16 @@ Module70000Desc = Gestion inventaire stock produit et mise a jour
 #
 # Page d'administration
 #
-MyModuleSetup = Configuration du module mon module
+MyModuleSetup = Configuration du module inventaire
 Settings = Réglages
-MyModuleSetupPage = Page de réglage de mon module
+MyModuleSetupPage = Page de réglage inventaire
 
 #
 # Page À propos
 #
 About = À propos
-MyModuleAbout = À propos de mon module
-MyModuleAboutPage = Page à propos de mon module
+MyModuleAbout = À propos
+MyModuleAboutPage = Page à propos
 
 #
 # Page d'exemple

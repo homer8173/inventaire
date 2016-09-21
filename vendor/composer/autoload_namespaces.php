@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Parsedown' => array($vendorDir . '/erusev/parsedown'),
+    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
+    'AdamWathan\\Form' => array($vendorDir . '/adamwathan/form/src'),
 );

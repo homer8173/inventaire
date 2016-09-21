@@ -2,3 +2,4 @@
 /build/html
 /build/doxygen/doxygen_warnings.log
 /.tx
+src/Ry/storage/cache/views/*
