@@ -35,30 +35,16 @@ if (!$res && file_exists("../../../../../dolibarr/htdocs/main.inc.php"))
 if (!$res)
     die("Include of main fails");
 dol_include_once('/inventaire/class/inventaire.class.php');
+dol_include_once('/inventaire/class/entrepot.inventaire.class.php');
+require_once  'vendor/autoload.php';
 $langs->load("inventaire@inventaire");
-$Inventaire = new inventaire($db);
+$Inventaire = new Inventaire($db);
+$Entrepot =  new InventaireEntrepot($db);
 /*
  * ACTION
  */
 
-
-$sql = "SELECT * ";
-$sql.= " FROM ".MAIN_DB_PREFIX."entrepot ";
-$entrepot = array();
-$resql = $db->query($sql);
-if ($resql)
-{
-    $num = $db->num_rows($resql);
-    $i = 0;
-    $var=True;
-    while ($i < $num)
-    {
-        $i++;
-        $objp = $db->fetch_object($resql);
-        $entrepot[$objp->rowid] = $objp;
-    }
-}
-
+$entrepot=$Entrepot->listAll();
 
 $resultat = array();
 $sql = "SELECT * ";

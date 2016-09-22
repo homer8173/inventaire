@@ -26,6 +26,7 @@
 
 // Put here all includes required by your class file
 require_once(DOL_DOCUMENT_ROOT."/core/class/commonobject.class.php");
+require_once DOL_DOCUMENT_ROOT .'/core/class/commonobjectline.class.php';
 //require_once(DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 
@@ -35,23 +36,28 @@ require_once(DOL_DOCUMENT_ROOT."/core/class/commonobject.class.php");
  */
 class Inventaire extends CommonObject
 {
-	var $db;							//!< To store db handler
-	var $error;							//!< To return error code (or message)
-	var $errors=array();				//!< To return several error codes (or messages)
-	var $element='inventairename';			//!< Id that identify managed objects
-	var $table_element='inventaire_name';		//!< Name of table without prefix where object is stored
+	public $db;							//!< To store db handler
+	public $error;							//!< To return error code (or message)
+	public $errors=array();				//!< To return several error codes (or messages)
+	public $element='inventaire';			//!< Id that identify managed objects
+	public $table_element='inventaire_name';		//!< Name of table without prefix where object is stored
 
-    var $id;
+    public $id;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $table_ref_field = 'ref';
     
-	var $row_id;
-	var $name;
-	var $entrepots;
-	var $statut;
-	var $date_created='';
-	var $fk_user_created;
-	var $date_modified='';
-	var $fk_user_modified;
-	var $date_applied='';
+	public $row_id;
+	public $name;
+	public $entrepots;
+	public $statut;
+	public $date_created;
+	public $fk_user_created;
+	public $date_modified='';
+	public $fk_user_modified;
+	public $date_applied='';
 
     
 
@@ -75,90 +81,81 @@ class Inventaire extends CommonObject
      *  @param  int		$notrigger   0=launch triggers after, 1=disable triggers
      *  @return int      		   	 <0 if KO, Id of created object if OK
      */
-    function create($user, $notrigger=0)
+    public function create($user, $notrigger=0)
     {
-    	global $conf, $langs;
-		$error=0;
+        global $conf, $langs;
+        $error=0;
 
-		// Clean parameters
-        
-		if (isset($this->row_id)) $this->row_id=trim($this->row_id);
-		if (isset($this->name)) $this->name=trim($this->name);
-		if (isset($this->entrepots)) $this->entrepots=trim($this->entrepots);
-		if (isset($this->statut)) $this->statut=trim($this->statut);
-		if (isset($this->fk_user_created)) $this->fk_user_created=trim($this->fk_user_created);
-		if (isset($this->fk_user_modified)) $this->fk_user_modified=trim($this->fk_user_modified);
+        // Clean parameters
 
-        
-
-		// Check parameters
-		// Put here code to add control on parameters values
+        if (isset($this->name)) $this->name=trim($this->name);
+        if (isset($this->statut)) $this->statut=trim($this->statut);
+        if (isset($this->date_created)) $this->date_created=trim($this->date_created);
+        if (isset($this->fk_user_created)) $this->fk_user_created=trim($this->fk_user_created);
+// 		if (isset($this->date_modified)) $this->date_modified=trim($this->date_modified);
+// 		if (isset($this->fk_user_modified)) $this->fk_user_modified=trim($this->fk_user_modified);
+// 		if (isset($this->date_applied)) $this->date_applied=trim($this->date_applied);
+// 		if (isset($this->fk_user_applied)) $this->fk_user_applied=trim($this->fk_user_applied);
 
         // Insert request
-		$sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element."(";
-		
-		$sql.= "name,";
-		$sql.= "entrepots,";
-		$sql.= "statut,";
-		$sql.= "date_created,";
-		$sql.= "fk_user_created,";
-		$sql.= "date_modified,";
-		$sql.= "fk_user_modified,";
-		$sql.= "date_applied";
 
-		
+        $sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element."(";
+// 		$sql.= " row_id,";
+        $sql.= " name,";
+        $sql.= " entrepots,";
+        $sql.= " statut,";
+        $sql.= " date_created,";
+        $sql.= " fk_user_created";
         $sql.= ") VALUES (";
-        
-		$sql.= " ".(! isset($this->name)?'NULL':"'".$this->db->escape($this->name)."'").",";
-		$sql.= " ".(! isset($this->entrepots)?'NULL':"'".$this->db->escape($this->entrepots)."'").",";
-		$sql.= " ".(! isset($this->statut)?'NULL':"'".$this->statut."'").",";
-		$sql.= " ".(! isset($this->date_created) || dol_strlen($this->date_created)==0?'NULL':"'".$this->db->idate($this->date_created)."'").",";
-		$sql.= " ".(! isset($this->fk_user_created)?'NULL':"'".$this->fk_user_created."'").",";
-		$sql.= " ".(! isset($this->date_modified) || dol_strlen($this->date_modified)==0?'NULL':"'".$this->db->idate($this->date_modified)."'").",";
-		$sql.= " ".(! isset($this->fk_user_modified)?'NULL':"'".$this->fk_user_modified."'").",";
-		$sql.= " ".(! isset($this->date_applied) || dol_strlen($this->date_applied)==0?'NULL':"'".$this->db->idate($this->date_applied)."'")."";
+        $sql.= " ".(! isset($this->name)?'NULL':"'".$this->name."'").",";
+        $sql.= " ".(! isset($this->entrepots)?'NULL':"'".$this->entrepots."'").",";
+        $sql.= " ".(! isset($this->statut)?'0':"'".$this->statut."'").",";
+        $sql.= " ".(! isset($this->date_created)?'NOW()':"'".$this->db->idate($this->date_created)."'").",";
+        $sql.= " ".(! isset($this->fk_user_created)? $user->id:"'".$this->fk_user_created."'")."";
+        $sql.= ")";
 
-        
-		$sql.= ")";
+        $this->db->begin();
 
-		$this->db->begin();
-
-	   	dol_syslog(__METHOD__, LOG_DEBUG);
+        dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
-    	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
+        if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
 
-		if (! $error)
+        if (! $error)
         {
             $this->id = $this->db->last_insert_id(MAIN_DB_PREFIX.$this->table_element);
 
-			if (! $notrigger)
-			{
-	            // Uncomment this and change MYOBJECT to your own tag if you
-	            // want this action calls a trigger.
+            if ($this->id)
+            {
+                $this->ref='(PROV'.$this->id.')';
+                $sql = 'UPDATE '.MAIN_DB_PREFIX.$this->table_element." SET ref='".$this->ref."' WHERE row_id=".$this->id;
 
-	            //// Call triggers
-	            //$result=$this->call_trigger('MYOBJECT_CREATE',$user);
-	            //if ($result < 0) { $error++; //Do also what you must do to rollback action if trigger fail}
-	            //// End call triggers
-			}
+                dol_syslog(get_class($this)."::create", LOG_DEBUG);
+                $resql=$this->db->query($sql);
+                if (! $resql) $error++;
+            }
+            if (! $notrigger)
+            {
+
+            }
         }
 
         // Commit or rollback
+
         if ($error)
-		{
-			foreach($this->errors as $errmsg)
-			{
-	            dol_syslog(__METHOD__." ".$errmsg, LOG_ERR);
-	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}
-			$this->db->rollback();
-			return -1*$error;
-		}
-		else
-		{
-			$this->db->commit();
+        {
+            foreach($this->errors as $errmsg)
+            {
+                dol_syslog(get_class($this)."::create ".$errmsg, LOG_ERR);
+                $this->error.=($this->error?', '.$errmsg:$errmsg);
+            }
+            $this->db->rollback();
+            return -1*$error;
+        }
+        else
+        {
+            $this->db->commit();
             return $this->id;
-		}
+        }
     }
 
 
@@ -173,9 +170,8 @@ class Inventaire extends CommonObject
     {
     	global $langs;
         $sql = "SELECT";
-		$sql.= " t.rowid,";
-		
-		$sql.= " t.row_id,";
+        $sql.= " t.row_id,";
+        $sql.= " ref,";
 		$sql.= " t.name,";
 		$sql.= " t.entrepots,";
 		$sql.= " t.statut,";
@@ -188,7 +184,7 @@ class Inventaire extends CommonObject
 		
         $sql.= " FROM ".MAIN_DB_PREFIX.$this->table_element." as t";
         if ($ref) $sql.= " WHERE t.ref = '".$ref."'";
-        else $sql.= " WHERE t.rowid = ".$id;
+        else $sql.= " WHERE t.row_id = ".$id;
 
     	dol_syslog(get_class($this)."::fetch");
         $resql=$this->db->query($sql);
@@ -198,13 +194,13 @@ class Inventaire extends CommonObject
             {
                 $obj = $this->db->fetch_object($resql);
 
-                $this->id    = $obj->rowid;
-                
+                $this->id    = $obj->row_id;
+                $this->ref    = $obj->ref;
 				$this->row_id = $obj->row_id;
 				$this->name = $obj->name;
 				$this->entrepots = $obj->entrepots;
 				$this->statut = $obj->statut;
-				$this->date_created = $this->db->jdate($obj->date_created);
+                $this->datec = $this->date_created    = $this->db->jdate($obj->date_created);
 				$this->fk_user_created = $obj->fk_user_created;
 				$this->date_modified = $this->db->jdate($obj->date_modified);
 				$this->fk_user_modified = $obj->fk_user_modified;
@@ -456,7 +452,7 @@ class Inventaire extends CommonObject
         if (! empty($this->ref))
             $label .= '<br><b>' . $langs->trans('Ref') . ':</b> '.$this->ref;
 
-        $link = '<a href="'.dol_buildpath('/custom/inventaire/fiche.php?id='.$this->id,1).'" title="'.dol_escape_htmltag($label, 1).'" class="classfortooltip">';
+        $link = '<a href="'.dol_buildpath('/inventaire/fiche.php?id='.$this->id,1).'" title="'.dol_escape_htmltag($label, 1).'" class="classfortooltip">';
         $linkend='</a>';
 
         $picto='inventaire';
@@ -467,4 +463,6 @@ class Inventaire extends CommonObject
         if ($withpicto != 2) $result.=$link.$this->ref.$linkend;
         return $result;
     }
+
+
 }
