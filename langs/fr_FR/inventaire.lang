@@ -123,3 +123,5 @@ InventaireConfigProductVirtualInInventaireDetail=Inclure ces produits dans l'inv
 InventaireConfigProductVirtualInInventaire=Produit Virtuel
 InventaireConfigProductVirtualOff=Non inclus
 InventaireConfigProductVirtualOn=Inclus
+#Export
+InventaireExport=Inventaire

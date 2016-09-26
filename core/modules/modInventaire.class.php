@@ -388,92 +388,50 @@ class modInventaire extends DolibarrModules
 		// Example:
 		$this->export_code[$r]=$this->rights_class.'_'.$r;
 		//// Translation key (used only if key ExportDataset_xxx_z not found)
-		$this->export_label[$r]='InventaireLines';
+		$this->export_label[$r]='InventaireExport';
 		//// Condition to show export in list (ie: '$user->id==3').
 		//// Set to 1 to always show when module is enabled.
 		$this->export_enabled[$r]='1';
-		$this->export_permission[$r]=array(array("inventaire","inventaire","export"));
-		//$this->export_fields_array[$r]=array(
-		//	's.rowid'=>"IdCompany",
-		//	's.nom'=>'CompanyName',
-		//	's.address'=>'Address',
-		//	's.cp'=>'Zip',
-		//	's.ville'=>'Town',
-		//	's.fk_pays'=>'Country',
-		//	's.tel'=>'Phone',
-		//	's.siren'=>'ProfId1',
-		//	's.siret'=>'ProfId2',
-		//	's.ape'=>'ProfId3',
-		//	's.idprof4'=>'ProfId4',
-		//	's.code_compta'=>'CustomerAccountancyCode',
-		//	's.code_compta_fournisseur'=>'SupplierAccountancyCode',
-		//	'f.rowid'=>"InvoiceId",
-		//	'f.facnumber'=>"InvoiceRef",
-		//	'f.datec'=>"InvoiceDateCreation",
-		//	'f.datef'=>"DateInvoice",
-		//	'f.total'=>"TotalHT",
-		//	'f.total_ttc'=>"TotalTTC",
-		//	'f.tva'=>"TotalVAT",
-		//	'f.paye'=>"InvoicePaid",
-		//	'f.fk_statut'=>'InvoiceStatus',
-		//	'f.note'=>"InvoiceNote",
-		//	'fd.rowid'=>'LineId',
-		//	'fd.description'=>"LineDescription",
-		//	'fd.price'=>"LineUnitPrice",
-		//	'fd.tva_tx'=>"LineVATRate",
-		//	'fd.qty'=>"LineQty",
-		//	'fd.total_ht'=>"LineTotalHT",
-		//	'fd.total_tva'=>"LineTotalTVA",
-		//	'fd.total_ttc'=>"LineTotalTTC",
-		//	'fd.date_start'=>"DateStart",
-		//	'fd.date_end'=>"DateEnd",
-		//	'fd.fk_product'=>'ProductId',
-		//	'p.ref'=>'ProductRef'
-		//);
-		//$this->export_entities_array[$r]=array('s.rowid'=>"company",
-		//	's.nom'=>'company',
-		//	's.address'=>'company',
-		//	's.cp'=>'company',
-		//	's.ville'=>'company',
-		//	's.fk_pays'=>'company',
-		//	's.tel'=>'company',
-		//	's.siren'=>'company',
-		//	's.siret'=>'company',
-		//	's.ape'=>'company',
-		//	's.idprof4'=>'company',
-		//	's.code_compta'=>'company',
-		//	's.code_compta_fournisseur'=>'company',
-		//	'f.rowid'=>"invoice",
-		//	'f.facnumber'=>"invoice",
-		//	'f.datec'=>"invoice",
-		//	'f.datef'=>"invoice",
-		//	'f.total'=>"invoice",
-		//	'f.total_ttc'=>"invoice",
-		//	'f.tva'=>"invoice",
-		//	'f.paye'=>"invoice",
-		//	'f.fk_statut'=>'invoice',
-		//	'f.note'=>"invoice",
-		//	'fd.rowid'=>'invoice_line',
-		//	'fd.description'=>"invoice_line",
-		//	'fd.price'=>"invoice_line",
-		//	'fd.total_ht'=>"invoice_line",
-		//	'fd.total_tva'=>"invoice_line",
-		//	'fd.total_ttc'=>"invoice_line",
-		//	'fd.tva_tx'=>"invoice_line",
-		//	'fd.qty'=>"invoice_line",
-		//	'fd.date_start'=>"invoice_line",
-		//	'fd.date_end'=>"invoice_line",
-		//	'fd.fk_product'=>'product',
-		//	'p.ref'=>'product'
-		//);
-		//$this->export_sql_start[$r] = 'SELECT DISTINCT ';
-		//$this->export_sql_end[$r] = ' FROM (' . MAIN_DB_PREFIX . 'facture as f, '
-		//	. MAIN_DB_PREFIX . 'facturedet as fd, ' . MAIN_DB_PREFIX . 'societe as s)';
-		//$this->export_sql_end[$r] .= ' LEFT JOIN ' . MAIN_DB_PREFIX
-		//	. 'product as p on (fd.fk_product = p.rowid)';
-		//$this->export_sql_end[$r] .= ' WHERE f.fk_soc = s.rowid '
-		//	. 'AND f.rowid = fd.fk_facture';
-		//$r++;
+		$this->export_permission[$r]=array();
+		$this->export_fields_array[$r]=array(
+			'i.row_id'=>"Inventaire id",
+			'i.ref'=>'Ref. invenataire',
+			'i.date_created'=>'Date Creation',
+            'p.label'=>'Produit',
+            'p.ref'=>'ref. produit',
+            'ide.value'=>'Stock Physique',
+            'ide.pmp'=>'PMP',
+            'e.label'=>'Entrepot',
+		);
+
+        /* TYPE FIELD ENTREPOT*/
+        $this->export_TypeFields_array[$r]=array(
+            'i.row_id'=>"Numeric",
+            'i.ref'=>'Text',
+        );
+
+		$this->export_entities_array[$r]=array(
+            'i.row_id'=>"inventaire id",
+			'i.ref'=>'Ref. inventaire',
+            'i.date_created'=>'Date Creation',
+            'p.label'=>'produit',
+            'p.ref'=>'ref. produit',
+            'ide.value'=>'Stock Physique',
+            'ide.pmp'=>'PMP',
+            'e.label'=>'Entrepot',
+
+		);
+		$this->export_sql_start[$r] = 'SELECT  ';
+		$this->export_sql_end[$r] = ' FROM ' . MAIN_DB_PREFIX . 'inventaire_name as i
+		  INNER JOIN '.MAIN_DB_PREFIX.'inventaire_app as idp ON (idp.k_inventaire_id=i.row_id) ';
+		$this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
+			. 'inventaire_entrepot as ide on (ide.fk_inventaire_line_id = idp.row_id) ';
+        $this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
+            . 'entrepot as e on (e.rowid = ide.fk_entrepot_id) ';
+		$this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
+            . 'product as p on (p.rowid = idp.k_product_id) ';
+        $this->export_sql_end[$r] .= ' WHERE 1 ';
+		$r++;
 
 		// Can be enabled / disabled only in the main company when multi-company is in use
 		// $this->core_enabled = 1;
