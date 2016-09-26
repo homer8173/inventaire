@@ -386,13 +386,13 @@ class modInventaire extends DolibarrModules
 		$r = 0;
 
 		// Example:
-		//$this->export_code[$r]=$this->rights_class.'_'.$r;
+		$this->export_code[$r]=$this->rights_class.'_'.$r;
 		//// Translation key (used only if key ExportDataset_xxx_z not found)
-		//$this->export_label[$r]='CustomersInvoicesAndInvoiceLines';
+		$this->export_label[$r]='InventaireLines';
 		//// Condition to show export in list (ie: '$user->id==3').
 		//// Set to 1 to always show when module is enabled.
-		//$this->export_enabled[$r]='1';
-		//$this->export_permission[$r]=array(array("facture","facture","export"));
+		$this->export_enabled[$r]='1';
+		$this->export_permission[$r]=array(array("inventaire","inventaire","export"));
 		//$this->export_fields_array[$r]=array(
 		//	's.rowid'=>"IdCompany",
 		//	's.nom'=>'CompanyName',

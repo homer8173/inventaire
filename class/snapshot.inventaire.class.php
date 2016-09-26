@@ -22,7 +22,7 @@ class Snapshot {
 
     @param $entrepots array result of chekcbox choose entrepots
      */
-    function ExtractProducts(  $entrepots ){
+    function ExtractProducts(  $entrepots, $date_inventaire ){
         global $conf;
 
 
@@ -37,12 +37,8 @@ class Snapshot {
 
 
         $sql.= " AND fk_entrepot IN (". implode(',', $ent) .")  ";
+        $sql.= " AND p.datec <= '$date_inventaire'";
 
-        $sql.= " AND ( fk_product_type = 0 ";
-        if ($conf->global->PRODUCT_VIRTUAL == 1)  $sql.= " OR fk_product_type = 1 ";
-        $sql.= " ) ";
-        $sql.= " AND ( p.tosell = '".(($conf->global->PRODUCT_HORS_VENTE == 1)? 1 :0)."' ";
-        $sql.= " OR p.tobuy = '".(($conf->global->PRODUCT_HORS_ACHAT == 1)? 1 : 0)."') ";
         $sql.= " GROUP BY fk_entrepot ,p.rowid   ";
 
         $resql = $this->db->query($sql);

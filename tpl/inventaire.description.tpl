@@ -21,6 +21,7 @@ global $langs, $resultat, $object, $entrepot, $Entrepot;
 
 $list = explode(',',$object->entrepots);
 $i=0;
+
 ?>
 <div class="tabBar">
     <table class="border" width="100%">

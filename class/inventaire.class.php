@@ -110,7 +110,7 @@ class Inventaire extends CommonObject
         $sql.= " ".(! isset($this->name)?'NULL':"'".$this->name."'").",";
         $sql.= " ".(! isset($this->entrepots)?'NULL':"'".$this->entrepots."'").",";
         $sql.= " ".(! isset($this->statut)?'0':"'".$this->statut."'").",";
-        $sql.= " ".(! isset($this->date_created)?'NOW()':"'".$this->db->idate($this->date_created)."'").",";
+        $sql.= " ".(!isset($this->date_created ) && $this->date_created==''?'NOW()':"'".$this->db->idate($this->date_created)."'").",";
         $sql.= " ".(! isset($this->fk_user_created)? $user->id:"'".$this->fk_user_created."'")."";
         $sql.= ")";
 
@@ -332,7 +332,7 @@ class Inventaire extends CommonObject
 		if (! $error)
 		{
     		$sql = "DELETE FROM ".MAIN_DB_PREFIX.$this->table_element;
-    		$sql.= " WHERE rowid=".$this->id;
+    		$sql.= " WHERE row_id=".$this->id;
 
     		dol_syslog(__METHOD__);
     		$resql = $this->db->query($sql);
@@ -411,6 +411,84 @@ class Inventaire extends CommonObject
 			return -1;
 		}
 	}
+
+    public function fix($user){
+
+        global $conf;
+        require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+
+        // Define new ref
+        if (! $error && (preg_match('/^[\(]?PROV/i', $this->ref) || empty($this->ref))) // empty should not happened, but when it occurs, the test save life
+        {
+            $num = $this->getNextNumRef($this->thirdparty);
+        }
+        else
+        {
+            $num = $this->ref;
+        }
+
+
+
+        $sql = 'UPDATE '.MAIN_DB_PREFIX.$this->table_element." SET ref='".$num."', date_modified = NOW(), statut = 2, fk_user_modified = ".(($this->fk_user_modified>0)?"'".$this->fk_user_modified."'":$user->id)."  WHERE row_id=".$this->id;
+
+        dol_syslog(get_class($this)."::create", LOG_DEBUG);
+        return $resql=$this->db->query($sql);
+
+    }
+
+   /*
+    *
+    */
+    function getNextNumRef($soc)
+    {
+        global $conf, $db, $langs;
+        $langs->load("interventions");
+
+        if (! empty($conf->global->FICHEINVENTAIRE_ADDON))
+        {
+            $mybool = false;
+
+            $file = "mod_".$conf->global->FICHEINVENTAIRE_ADDON.".php";
+            $classname = "mod_".$conf->global->FICHEINVENTAIRE_ADDON;
+
+            // Include file with class
+            $dir = dol_buildpath("/inventaire/core/modules/inventaire/");
+            /*
+                        foreach ($dirmodels as $reldir) {
+
+                            $dir = dol_buildpath($reldir."core/modules/fichinter/");*/
+
+            // Load file with numbering class (if found)
+            $mybool|=@include_once $dir.$file;
+// 			}
+
+            if (! $mybool)
+            {
+                dol_print_error('',"Failed to include file ".$file);
+                return '';
+            }
+
+            $obj = new $classname();
+            $numref = "";
+            $numref = $obj->getNextValue($soc,$this);
+
+            if ( $numref != "")
+            {
+                return $numref;
+            }
+            else
+            {
+                dol_print_error($db,"Fichinter::getNextNumRef ".$obj->error);
+                return "";
+            }
+        }
+        else
+        {
+            $langs->load("errors");
+            print $langs->trans("Error")." ".$langs->trans("Error_FICHEINTER_ADDON_NotDefined");
+            return "";
+        }
+    }
 
 
 	/**

@@ -87,9 +87,9 @@ $list = explode(',',$object->entrepots);
 foreach( $entrepot as $key=>$row)
 	if($key==$entrepotid){
 	$aColumns[] = 'ide.origin_value';
-	$aColumns[] = 'ide.value';
+	//$aColumns[] = 'ide.value';
 	$aColumns[] = 'ide.origin_pmp';
-	$aColumns[] = 'ide.pmp';
+	//$aColumns[] = 'ide.pmp';
 	}
 $aColumns[] = 'id.date_modified';
 
@@ -230,11 +230,11 @@ switch($action){
 				  if($key==$entrepotid){
 						$curr[]=$tmp3;
 				  
-						$curr[]= '<input type="text" class="ajaxupdate"  name="valuestock['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.(int)$tmp.'">';
+						//$curr[]= '<input type="text" class="ajaxupdate"  name="valuestock['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.(int)$tmp.'">';
 						
 						$curr[]=$tmp4;
 						
-						$curr[]= '<input type="text" class="ajaxupdate"  name="valuepmp['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.$tmp2.'">';
+						//$curr[]= '<input type="text" class="ajaxupdate"  name="valuepmp['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.$tmp2.'">';
 						
 					$c++;
 					}
@@ -324,9 +324,9 @@ $var=false;
 
 					foreach( $entrepot as $key=>$row)
 		 if($key==$entrepotid){
-				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginStock").'</th>';
+				//echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginStock").'</th>';
 				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductStock").'</th>';
-				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginPmp").'</th>';
+				//echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginPmp").'</th>';
 				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductPmp").'</th>';
 			}
 

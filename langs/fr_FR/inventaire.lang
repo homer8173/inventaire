@@ -43,3 +43,83 @@ MyModuleAboutPage = Page à propos
 # Page d'exemple
 #
 MyPageName = Nom de ma page
+InventaireArea=Inventaires
+InventaireId= Inventaire id
+Inventaire= Inventaire
+InventaireCreated= Créé
+InventaireFixed=Fixé/Appliqué
+InventaireInitButton=Initialiser un nouvel inventaire
+
+# fiche
+InventaireFicheTitle=Fiche Inventaire
+InventaireName=Inventaire
+InventaireNameHelp=Le nom de votre inventaire
+InventaireDate=Date
+InventaireProductName=Produit
+InventaireProductOriginStock=Stock Original
+InventaireProductStock=Stock
+InventaireProductOriginPmp=Pmp Original
+InventaireProductPmp=Pmp
+InventaireProductEntrepot=Entrepot
+InventairenewValueStock=Valeur du stock
+InventaireLineUpdate=Mise à jour
+
+InventaireCard=Inventaire
+InventaireRef=Ref.
+InventaireEntrepot=Entrepots
+
+
+# products
+InventaireProducts=Produits
+
+# valorisation
+InventaireValorisation=Pmp
+
+#export
+InventaireLines=Lignes des inventaires
+InventaireLabel= Label
+DateC=Crée
+DateA=Appliqué
+DateM=Modifié
+LineStock=Stock
+LinePmp=Pmp
+
+# Add
+InventaireFormAdd=New inventory
+InventaireAddSnapShot=Creating a Snapshot of stock
+InventaireNameHelp=Nom ou référence de l'inventaire
+InventaireAddButton=Ajouter
+
+# confirm delete
+InventaireFormDelete=Suppression de cet inventaire
+InventaireConfirmDelete=Vous êtes sûr de vouloir supprimer cet inventaire. Il s'agit d'une operation irrevesible.
+InventaireConfirmDeleteButton=Supprimer
+Inventairedate=date
+
+# Confirm applied
+InventaireFormApplied=Mise en oeuvre de ce stock
+InventaireConfirmApplied=Vous êtes sûr de vouloir mettre en oeuvre ce stock?. Cette operation re-initialise l'ensemble des stocks afin de forcer ceux ci sur les valeurs que vous avez defini. Il s'agit d'une operation irrevesible.
+InventaireConfirmAppliedButton=Appliquer
+InventaireAppliedInLineComment=Synchro inventaire
+
+# Confirm Fixed
+InventaireFormFixed=Cloture les modifications de cet inventaires
+InventaireConfirmFixed=Vous êtes sûr de vouloir clore les modifications sur cet inventaire. Une fois effectué, vous ne pourrez plus modifié une valeur dans celui ci. Il s'agit d'une operation irrevesible.
+InventaireConfirmFixedButton=Fixer
+
+# Config
+InventaireConfigTitle=Configuration des inventaires
+InventaireConfigProductHorsVenteInInventaire=Produit Hors Vente
+InventaireConfigProductHorsVenteOff=Non inclus
+InventaireConfigProductHorsVenteOn=Inclus
+InventaireConfigProductHorsVenteInInventaireDetail=Inclure ces produits dans l'inventaire
+InventaireConfigProductHorsAchatInInventaire=Produit Hors Achat
+InventaireConfigProductHorsAchatOff=Non inclus
+InventaireConfigProductHorsAchatOn=Inclus
+InventaireConfigProductHorsAchatInInventaireDetail=Inclure ces produits dans l'inventaire
+
+
+InventaireConfigProductVirtualInInventaireDetail=Inclure ces produits dans l'inventaire
+InventaireConfigProductVirtualInInventaire=Produit Virtuel
+InventaireConfigProductVirtualOff=Non inclus
+InventaireConfigProductVirtualOn=Inclus
