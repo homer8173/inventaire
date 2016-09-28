@@ -200,7 +200,8 @@ class Inventaire extends CommonObject
 				$this->name = $obj->name;
 				$this->entrepots = $obj->entrepots;
 				$this->statut = $obj->statut;
-                $this->datec = $this->date_created    = $this->db->jdate($obj->date_created);
+                $this->datec = $obj->date_created ;
+                $this->date_created    = $this->db->jdate($obj->date_created); //;
 				$this->fk_user_created = $obj->fk_user_created;
 				$this->date_modified = $this->db->jdate($obj->date_modified);
 				$this->fk_user_modified = $obj->fk_user_modified;
@@ -540,6 +541,13 @@ class Inventaire extends CommonObject
         if ($withpicto && $withpicto != 2) $result.=' ';
         if ($withpicto != 2) $result.=$link.$this->ref.$linkend;
         return $result;
+    }
+    /*
+     * verificatiob date inventaire
+     */
+   public function verifyDate($date)
+    {
+        return strtotime($date);
     }
 
 

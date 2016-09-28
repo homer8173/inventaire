@@ -88,10 +88,10 @@ foreach( $entrepot as $key=>$row)
 	if($key==$entrepotid){
 	$aColumns[] = 'ide.origin_value';
 	//$aColumns[] = 'ide.value';
-	$aColumns[] = 'ide.origin_pmp';
+	//$aColumns[] = 'ide.origin_pmp';
 	//$aColumns[] = 'ide.pmp';
 	}
-$aColumns[] = 'id.date_modified';
+//$aColumns[] = 'id.date_modified';
 
 $Datatable->SetColumn($aColumns);
 				
@@ -232,14 +232,14 @@ switch($action){
 				  
 						//$curr[]= '<input type="text" class="ajaxupdate"  name="valuestock['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.(int)$tmp.'">';
 						
-						$curr[]=$tmp4;
+						//$curr[]=$tmp4;
 						
 						//$curr[]= '<input type="text" class="ajaxupdate"  name="valuepmp['.$row->rowid.']['.$objp->k_product_id.']" size="18" '.(($object->statut >= 2)?'disabled="disabled"' : '').' value="'.$tmp2.'">';
 						
 					$c++;
 					}
 
-				$curr[]= ' '.(!empty($objp->date_modified) ? date("d-m-Y",$db->jdate($objp->date_modified)) : '-' );
+				//$curr[]= ' '.(!empty($objp->date_modified) ? date("d-m-Y",$db->jdate($objp->date_modified)) : '-' );
 
 
 				  $output['aaData'][] = $curr;
@@ -327,10 +327,10 @@ $var=false;
 				//echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginStock").'</th>';
 				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductStock").'</th>';
 				//echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductOriginPmp").'</th>';
-				echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductPmp").'</th>';
+				//echo '<th style="width:100px;text-align:left">'. $langs->trans("InventaireProductPmp").'</th>';
 			}
 
-		print '<th style="width:100px;text-align:left">'. $langs->trans("InventaireLineUpdate").'</th>'. '</tr></thead>';
+		//print '<th style="width:100px;text-align:left">'. $langs->trans("InventaireLineUpdate").'</th>'. '</tr></thead>';
 		print "<tbody>\n";
 // 				AJax Call
 		print "</tbody>\n";

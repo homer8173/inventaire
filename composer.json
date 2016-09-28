@@ -13,7 +13,8 @@
     },
     "require": {
         "philo/laravel-blade": "^3.1",
-        "adamwathan/form": "^0.8.0"
+        "adamwathan/form": "^0.8.0",
+        "erusev/parsedown": "*"
     },
     "autoload": {
       "psr-4": {

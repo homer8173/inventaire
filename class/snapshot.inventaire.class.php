@@ -22,7 +22,7 @@ class Snapshot {
 
     @param $entrepots array result of chekcbox choose entrepots
      */
-    function ExtractProducts(  $entrepots, $date_inventaire ){
+    function extractProducts($entrepots, $date_inventaire ){
         global $conf;
 
 
@@ -31,12 +31,12 @@ class Snapshot {
         $sql.= " FROM  ".MAIN_DB_PREFIX."product p LEFT JOIN ".MAIN_DB_PREFIX."product_stock ps ON (ps.fk_product = p.rowid) ";
         $sql.= " WHERE 1 ";
 
-        $ent = array();
+        /*$ent = array();
         foreach($entrepots as $key=>$row)
-            if($row == 1 ) $ent[] = $key;
+            if($row == 1 ) $ent[] = $key;*/
 
 
-        $sql.= " AND fk_entrepot IN (". implode(',', $ent) .")  ";
+        $sql.= " AND fk_entrepot IN (". $entrepots .")  ";
         $sql.= " AND p.datec <= '$date_inventaire'";
 
         $sql.= " GROUP BY fk_entrepot ,p.rowid   ";

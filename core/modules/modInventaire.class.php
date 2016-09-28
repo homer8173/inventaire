@@ -101,7 +101,7 @@ class modInventaire extends DolibarrModules
 			// Set this to 1 if module has its own models directory
 			//'models' => 0,
 			// Set this to relative path of css if module has its own css file
-			'css' => array('inventaire/css/mycss.css.php'),
+			//'css' => array('inventaire/css/mycss.css.php'),
 			// Set this to relative path of js file if module must load a js on all pages
 			// 'js' => array('mymodule/js/mymodule.js'),
 			// Set here all hooks context managed by module
@@ -200,9 +200,9 @@ class modInventaire extends DolibarrModules
 		// 'user'             to add a tab in user view
 
 		// Dictionaries
-		if (! isset($conf->mymodule->enabled)) {
-			$conf->mymodule=new stdClass();
-			$conf->mymodule->enabled = 0;
+		if (! isset($conf->inventaire->enabled)) {
+			$conf->inventaire=new stdClass();
+			$conf->inventaire->enabled = 0;
 		}
 		$this->dictionaries = array();
 		/* Example:
@@ -386,6 +386,7 @@ class modInventaire extends DolibarrModules
 		$r = 0;
 
 		// Example:
+        $r++;
 		$this->export_code[$r]=$this->rights_class.'_'.$r;
 		//// Translation key (used only if key ExportDataset_xxx_z not found)
 		$this->export_label[$r]='InventaireExport';
