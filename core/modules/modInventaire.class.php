@@ -184,9 +184,9 @@ class modInventaire extends DolibarrModules
 		// 'user'             to add a tab in user view
 
 		// Dictionaries
-		if (! isset($conf->inventaire->enabled)) {
-			$conf->inventaire=new stdClass();
-			$conf->inventaire->enabled = 0;
+		if (! isset($conf->mymodule->enabled)) {
+			$conf->mymodule=new stdClass();
+			$conf->mymodule->enabled = 0;
 		}
 		$this->dictionaries = array();
 		/* Example:
