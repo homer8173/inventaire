@@ -25,7 +25,7 @@ class InventaireLigneEntrepot {
 
     public function create($user){
 
-        return $this->db->query($sql= "INSERT INTO ".MAIN_DB_PREFIX."inventaire_entrepot (
+        $sql= "INSERT INTO ".MAIN_DB_PREFIX."inventaire_entrepot (
 			fk_inventaire_line_id,
 			fk_entrepot_id,
 			value,
@@ -44,7 +44,11 @@ class InventaireLigneEntrepot {
 			'".$this->origin_pmp."',
 			'".$user->id."',
 			'NOW()'
-		) ");
+		) ";
+        $this->db->begin();
+        $er= array($this->db);
+        return  $er ;//$this->db->query($sql);
+
     }
 
     public function update($user){
