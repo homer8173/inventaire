@@ -428,8 +428,6 @@ class Inventaire extends CommonObject
             $num = $this->ref;
         }
 
-
-
         $sql = 'UPDATE '.MAIN_DB_PREFIX.$this->table_element." SET ref='".$num."', date_modified = NOW(), statut = 2, fk_user_modified = ".(($this->fk_user_modified>0)?"'".$this->fk_user_modified."'":$user->id)."  WHERE row_id=".$this->id;
 
         dol_syslog(get_class($this)."::create", LOG_DEBUG);

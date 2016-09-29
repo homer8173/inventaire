@@ -64,15 +64,15 @@ class modInventaire extends DolibarrModules
 		// Module description
 		// used if translation string 'ModuleXXXDesc' not found
 		// (where XXX is value of numeric property 'numero' of module)
-		$this->description = "Gestion inventaire stock produit et mise a jour";
+		$this->description = "Gestion inventaire stock produit ";
 		// Possible values for version are: 'development', 'experimental' or version
-		$this->version = 'development';
+		$this->version = '0.1.1';
 		// Key used in llx_const table to save module status enabled/disabled
 		// (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		// Where to store the module in setup page
 		// (0=common,1=interface,2=others,3=very specific)
-		$this->special = 3;
+		$this->special = 0;
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png
 		// use this->picto='pictovalue'
@@ -150,26 +150,44 @@ class modInventaire extends DolibarrModules
 		// List of particular constants to add when module is enabled
 		// (name, type ['chaine' or ?], value, description, visibility, entity ['current' or 'allentities'], delete on unactive)
 		// Example:
-		$this->const = array(
-			//	0 => array(
-			//		'MYMODULE_MYNEWCONST1',
-			//		'chaine',
-			//		'myvalue',
-			//		'This is a constant to add',
-			//		1,
-			//      'current',
-			//      0,
-			//	),
-			//	1 => array(
-			//		'MYMODULE_MYNEWCONST2',
-			//		'chaine',
-			//		'myvalue',
-			//		'This is another constant to add',
-			//		0,
-			//	)
-		);
 
-		// Array to add new pages in new tabs
+        $this->const = array();
+
+        $r++;
+        $this->const[$r][0] = "PRODUCT_HORS_VENTE";
+        $this->const[$r][1] = "integer";
+        $this->const[$r][2] = "0";
+        $this->const[$r][3] = "intégrer les produits hors vente dans l'inventaire";
+        $this->const[$r][4] = 0;
+        $this->const[$r][5] = 1; // supprime la constante à la désactivation du module
+
+        $r++;
+        $this->const[$r][0] = "PRODUCT_HORS_ACHAT";
+        $this->const[$r][1] = "integer";
+        $this->const[$r][2] = "0";
+        $this->const[$r][3] = "intégrer les produits hors achat dans l'inventaire";
+        $this->const[$r][4] = 0;
+        $this->const[$r][5] = 1; // supprime la constante à la désactivation du modules
+
+
+        $r++;
+        $this->const[$r][0] = "PRODUCT_VIRTUAL";
+        $this->const[$r][1] = "integer";
+        $this->const[$r][2] = "0";
+        $this->const[$r][3] = "intégrer les produits virtuel dans l'inventaire";
+        $this->const[$r][4] = 0;
+        $this->const[$r][5] = 1; // supprime la constante à la désactivation du modules
+
+        $r++;
+        $this->const[$r][0] = "FICHEINVENTAIRE_ADDON";
+        $this->const[$r][1] = "chaine";
+        $this->const[$r][2] = "plaisance";
+        $this->const[$r][3] = "module de numérotation";
+        $this->const[$r][4] = 0;
+        $this->const[$r][5] = 1; // supprime la constante à la désactivation du modules
+
+
+        // Array to add new pages in new tabs
 		// Example:
 		$this->tabs = array(
 			//	// To add a new tab identified by code tabname1
@@ -414,7 +432,7 @@ class modInventaire extends DolibarrModules
 		$this->export_entities_array[$r]=array(
             'i.row_id'=>"inventaire id",
 			'i.ref'=>'Ref. inventaire',
-            'i.date_created'=>'Date Creation',
+            'i.date_created'=>'Date inventaire',
             'p.label'=>'produit',
             'p.ref'=>'ref. produit',
             'ide.value'=>'Stock Physique',

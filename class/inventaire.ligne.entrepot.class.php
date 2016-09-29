@@ -112,7 +112,7 @@ class InventaireLigneEntrepot {
     /*
      * somme stock physique à la date t
      */
-    public function sommeStock($produit_id, $date1, $date2, $entrepot){
+    public function sommeStock($produit_id, $date1, $date2, $entrepot=""){
         $sql= "SELECT ";
         $sql.= " tms,";
         $sql.= " datem,";
@@ -124,17 +124,20 @@ class InventaireLigneEntrepot {
         $sql.= " FROM " . MAIN_DB_PREFIX ."stock_mouvement";
         $sql.= " WHERE fk_product =".$produit_id;
         $sql.= " AND datem BETWEEN '$date1' AND '$date2'";
-        $sql.= " AND fk_entrepot =".$entrepot;
+
+        if($entrepot!="")
+            $sql.= " AND fk_entrepot =".$entrepot;
+
         $resql=$this->db->query($sql);
         $somme=0;
         if($resql){
             if($this->db->num_rows($resql)){
                 $obj = $this->db->fetch_object($resql);
-                $somme= $obj->somme;
+                $somme= (int) $obj->somme;
             }
-
+          return $somme;
         }
-        return $somme;
+        return 2;
 
     }
 

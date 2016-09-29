@@ -52,6 +52,8 @@ InventaireInitButton=Initialiser un nouvel inventaire
 
 # fiche
 InventaireFicheTitle=Fiche Inventaire
+InventaireForEntrepot= Entrepôt(s)
+InventaireRef=Ref. inventaire
 InventaireName=Inventaire
 InventaireNameHelp=Le nom de votre inventaire
 InventaireDate=Date
@@ -60,13 +62,14 @@ InventaireProductOriginStock=Stock Original
 InventaireProductStock=Stock physique
 InventaireProductOriginPmp=Pmp Original
 InventaireProductPmp=Pmp
-InventaireProductEntrepot=Entrepot
+InventaireProductEntrepot=Entrepôt
 InventairenewValueStock=Valeur du stock
 InventaireLineUpdate=Mise à jour
+InventaireChooseEntrepot= Entrepôts
 
 InventaireCard=Inventaire
 InventaireRef=Ref.
-InventaireEntrepot=Entrepots
+InventaireEntrepot=Entrepôts
 
 
 # products
@@ -85,8 +88,8 @@ LineStock=Stock
 LinePmp=Pmp
 
 # Add
-InventaireFormAdd=New inventory
-InventaireAddSnapShot=Creating a Snapshot of stock
+InventaireFormAdd=Nouvel inventaire
+InventaireAddSnapShot=Crée un inventaire
 InventaireNameHelp=Nom ou référence de l'inventaire
 InventaireAddButton=Ajouter
 

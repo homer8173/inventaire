@@ -21,10 +21,11 @@ global $langs, $resultat;
 <table class="noborder" width="100%">
     <tr class="liste_titre">
         <td><?php echo $langs->trans("InventaireId") ?></td>
+        <td><?php echo $langs->trans("InventaireRef") ?></td>
         <td><?php echo $langs->trans("InventaireName") ?></td>
         <td><?php echo $langs->trans("InventaireForEntrepot") ?></td>
         <td><?php echo $langs->trans("InventaireCreated") ?></td>
-        <td><?php echo $langs->trans("InventaireFixed") ?></td>
+
     </tr>
 
     <?php foreach($resultat as $row ):  ?>
@@ -36,13 +37,15 @@ global $langs, $resultat;
         <?php echo $row->linkfiche ; ?>
     </td>
     <td>
+        <?php echo $row->name; ?>
+    </td>
+    <td>
         <?php echo $row->entrepot_list ; ?>
     </td>
     <td>
         <?php echo $row->date_created;  ?>
-    <td>
-        <?php echo $row->linkaction; ?>
     </td>
+
     </tr>
     <?php endforeach; ?>
 </table>

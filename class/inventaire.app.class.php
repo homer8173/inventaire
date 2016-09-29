@@ -15,6 +15,7 @@ class InventaireApp {
     public $pmp;
     public $row_value;
     public $row_pmp;
+    public $stock_reel;
 
     public $origin_value;
     public $origin_pmp;
@@ -28,11 +29,13 @@ class InventaireApp {
         $sql= "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element."(
 			k_inventaire_id,
 			k_product_id,
-			pmp
+			pmp,
+			reel
 			) VALUES (
 			'".$this->k_inventaire_id."',
 			'".$this->k_product_id."',
-			'".$this->pmp."'
+			'".$this->pmp."',
+			'".$this->stock_reel."'
 			) ";
 
 
@@ -76,6 +79,7 @@ class InventaireApp {
             $this->applied = $objp->applied;
             $this->date_modified = $this->db->jdate($objp->date_modified);
             $this->fk_user_modified = $objp->fk_user_modified;
+            $this->stock_reel = $objp->reel;
 
             return 1;
         }

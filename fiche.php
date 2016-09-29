@@ -146,10 +146,11 @@ switch($action){
 
         if($object->fetch($id)){
             $_dateobjNow= new DateTime('now');
-            $date_now= $_dateobjNow->format("Y/m/d");
+            $date_now= $_dateobjNow->format("Y-m-d");
             $_dateobjInv= new DateTime($object->datec);
-            $date_inventaire=$_dateobjInv->format("Y/m/d");
+            $date_inventaire=$_dateobjInv->format("Y-m-d");
             if(strtotime($date_inventaire) <= strtotime($date_now)){
+
                 $object->fix($user);
                 $tmpresult = $snaptshot->extractProducts($object->entrepots, $object->datec);
 
@@ -158,10 +159,11 @@ switch($action){
 
                 $InventaireLine->k_inventaire_id = $object->id;
 
-                // insert line for one product and entrepot/qt stocked in db by serialize row
                 foreach($tmpresult as $pid => $row) {
+                    $somme_mouvement_stock=$Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now);
                     $InventaireLine->k_product_id = $pid;
                     $InventaireLine->pmp = $row['ppmp'];
+                    $InventaireLine->stock_reel=$row['reel'] - $somme_mouvement_stock;
 // 				  $InventaireLine->row_value = serialize($row['stock']);
 // 				  $InventaireLine->row_pmp = serialize($row['pmp']);
 // 				  $InventaireLine->origin_value = serialize($row['stock']);
@@ -170,12 +172,12 @@ switch($action){
                     $lineid = $InventaireLine->create($user);
 
                     foreach ($row['stock'] as $keid => $v) {
-                        $somme = $Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now, $keid);
+                        $somme_mouvement_stock = $Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now, $keid);
                         $Inventaireligneentrepot->fk_inventaire_line_id = $lineid;
                         $Inventaireligneentrepot->fk_entrepot_id = $keid;
-                        $Inventaireligneentrepot->value = $row['stock'][$keid] - $somme;
+                        $Inventaireligneentrepot->value = $row['stock'][$keid] - $somme_mouvement_stock;
                         $Inventaireligneentrepot->pmp = $row['pmp'][$keid];
-                        $Inventaireligneentrepot->origin_value = $row['stock'][$keid] - $somme;
+                        $Inventaireligneentrepot->origin_value = $row['stock'][$keid] - $somme_mouvement_stock;
                         $Inventaireligneentrepot->origin_pmp = $row['pmp'][$keid];
 
                         $Inventaireligneentrepot->create($user);
