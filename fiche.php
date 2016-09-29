@@ -122,6 +122,7 @@ switch($action){
 
         $object->date_created = $date_inventaire;
         $object->date_created  =implode(',', $ent);
+        $object->create($user);
         var_dump($object->date_created ,$object->date_created ,$object->create($user));
         exit;
 
