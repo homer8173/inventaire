@@ -20,10 +20,10 @@
 
 # Module label 'ModuleXXXName'
 # (where XXX is value of numeric property 'numero' of module)
-Module70000Name = Inventaire
+Module700411Name = Inventaire
 # Module description 'ModuleXXXDesc'
 # (where XXX is value of numeric property 'numero' of module)
-Module70000Desc = Gestion inventaire stock produit
+Module700411Desc = Gestion inventaire stock produit
 
 #
 # Page d'administration

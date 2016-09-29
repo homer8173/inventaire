@@ -58,26 +58,8 @@ Install
 
     For more information about the ```conf.php``` file take a look at the conf.php.example file.
 
-*Note that for Dolibarr versions before 3.5, the ```$dolibarr_main_url_root_alt``` has to be an absolute path*
 
-- Clone the repository in ```$dolibarr_main_document_root_alt/mymodule```
 
-*(You may have to create the ```htdocs/custom``` directory first if it doesn't exist yet.)*
-```sh
-git clone git@github.com:GPCsolutions/dolibarr-module-template.git mymodule
-```
-
-- From your browser:
-
-    - Log into Dolibarr as a super-administrator
-
-    - Under "Setup" -> "Other setup", set ```MAIN_FEATURES_LEVEL``` to ```2```
-
-    - Go to "Setup" -> "Modules"
-
-    - The module is under one of the tabs
-
-    - You should now be able to enable the new module and start coding ;)
 
 
 
