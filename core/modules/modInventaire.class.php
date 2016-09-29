@@ -64,7 +64,7 @@ class modInventaire extends DolibarrModules
 		// Module description
 		// used if translation string 'ModuleXXXDesc' not found
 		// (where XXX is value of numeric property 'numero' of module)
-		$this->description = "Gestion inventaire stock produit ";
+		$this->description = "Gestion inventaire stock produit";
 		// Possible values for version are: 'development', 'experimental' or version
 		$this->version = '0.1.1';
 		// Key used in llx_const table to save module status enabled/disabled
