@@ -32,22 +32,21 @@ class InventaireLigneEntrepot {
 			pmp,
 			origin_value,
 			origin_pmp,
-			fk_user_modified,
+			fk_user_modified
 		)
 		VALUES (
-			'".$this->fk_inventaire_line_id."',
-			'".$this->fk_entrepot_id."',
-			'".$this->value."',
-			'".$this->pmp."',
-			'".$this->origin_value."',
-			'".$this->origin_pmp."',
-			'".$user->id."'
-
-		) ";
+			$this->fk_inventaire_line_id,
+			$this->fk_entrepot_id,
+			$this->value,
+			$this->pmp,
+			$this->origin_value,
+			$this->origin_pmp,
+			$user->id
+			 )";
         $this->db->begin();
         $this->db->query($sql);
         dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
-        $er= array($this->db);
+        $er= array($this->db,$this->fk_inventaire_line_id,$this->fk_entrepot_id);
         return  $er ;//$this->db->query($sql);
 
     }
