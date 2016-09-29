@@ -121,7 +121,9 @@ switch($action){
             if($row == 1 ) $ent[] = $key;
 
         $object->date_created = $date_inventaire;
-        $object->entrepots =implode(',', $ent);
+        $object->date_created  =implode(',', $ent);
+        var_dump($object->date_created ,$object->date_created ,$object->create($user);
+        exit;
 
         if( ! $object->create($user) ){
             $mesg='<div class="error">'.$langs->trans('ErrorCreate','inventaire').'</div>';
