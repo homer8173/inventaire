@@ -50,7 +50,7 @@ class modInventaire extends DolibarrModules
 		// Id for module (must be unique).
 		// Use a free id here
 		// (See http://wiki.dolibarr.org/index.php/List_of_modules_id for available ranges).
-		$this->numero = 700411;
+		$this->numero = 70000;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'inventaire';
 
