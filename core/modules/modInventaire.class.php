@@ -72,7 +72,7 @@ class modInventaire extends DolibarrModules
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		// Where to store the module in setup page
 		// (0=common,1=interface,2=others,3=very specific)
-		$this->special = 0;
+		$this->special = 1;
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png
 		// use this->picto='pictovalue'
@@ -86,40 +86,6 @@ class modInventaire extends DolibarrModules
 		$this->module_parts = array(
 			// Set this to 1 if module has its own trigger directory
 			'triggers' => 1,
-			// Set this to 1 if module has its own login method directory
-			//'login' => 0,
-			// Set this to 1 if module has its own substitution function file
-			//'substitutions' => 0,
-			// Set this to 1 if module has its own menus handler directory
-			//'menus' => 0,
-			// Set this to 1 if module has its own theme directory (theme)
-			// 'theme' => 0,
-			// Set this to 1 if module overwrite template dir (core/tpl)
-			// 'tpl' => 0,
-			// Set this to 1 if module has its own barcode directory
-			//'barcode' => 0,
-			// Set this to 1 if module has its own models directory
-			//'models' => 0,
-			// Set this to relative path of css if module has its own css file
-			//'css' => array('inventaire/css/mycss.css.php'),
-			// Set this to relative path of js file if module must load a js on all pages
-			// 'js' => array('mymodule/js/mymodule.js'),
-			// Set here all hooks context managed by module
-			// 'hooks' => array('hookcontext1','hookcontext2'),
-			// To force the default directories names
-			// 'dir' => array('output' => 'othermodulename'),
-			// Set here all workflow context managed by module
-			// Don't forget to depend on modWorkflow!
-			// The description translation key will be descWORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2
-			// You will be able to check if it is enabled with the $conf->global->WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2 constant
-			// Implementation is up to you and is usually done in a trigger.
-			// 'workflow' => array(
-			//     'WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2' => array(
-			//         'enabled' => '! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)',
-			//         'picto' => 'yourpicto@mymodule',
-			//         'warning' => 'WarningTextTranslationKey',
-			//      ),
-			// ),
 		);
 
 		// Data directories to create when module is enabled.
