@@ -100,7 +100,6 @@ class Inventaire extends CommonObject
         // Insert request
 
         $sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element."(";
-// 		$sql.= " row_id,";
         $sql.= " name,";
         $sql.= " entrepots,";
         $sql.= " statut,";
@@ -118,7 +117,8 @@ class Inventaire extends CommonObject
 
         dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
-        return $resql;
+         $er=array($this->name,$this->entrepots,$this->statut,$this->date_created,$this->fk_user_created,$this->db);
+        return $er;
         if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
 
         if (! $error)
