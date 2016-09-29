@@ -23,7 +23,7 @@
 Module70000Name = Inventaire
 # Module description 'ModuleXXXDesc'
 # (where XXX is value of numeric property 'numero' of module)
-Module70000Desc = Gestion inventaire stock produit et mise a jour
+Module70000Desc = Gestion inventaire stock produit
 
 #
 # Page d'administration
