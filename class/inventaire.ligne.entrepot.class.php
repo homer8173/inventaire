@@ -46,6 +46,8 @@ class InventaireLigneEntrepot {
 			'NOW()'
 		) ";
         $this->db->begin();
+        $this->db->query($sql);
+        dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $er= array($this->db);
         return  $er ;//$this->db->query($sql);
 
