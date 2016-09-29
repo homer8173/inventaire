@@ -33,7 +33,6 @@ class InventaireLigneEntrepot {
 			origin_value,
 			origin_pmp,
 			fk_user_modified,
-			date_modified
 		)
 		VALUES (
 			'".$this->fk_inventaire_line_id."',
@@ -42,8 +41,8 @@ class InventaireLigneEntrepot {
 			'".$this->pmp."',
 			'".$this->origin_value."',
 			'".$this->origin_pmp."',
-			'".$user->id."',
-			'NOW()'
+			'".$user->id."'
+
 		) ";
         $this->db->begin();
         $this->db->query($sql);
