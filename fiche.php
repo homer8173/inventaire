@@ -123,7 +123,7 @@ switch($action){
         $object->date_created = $date_inventaire;
         $object->entrepots  =implode(',', $ent);
         $object->create($user);
-        var_dump($object->date_created ,$object->entrepots ,$object->create($user));
+        var_dump($object->date_created ,$object->entrepots ,$object->create($user), $user);
         exit;
 
         if( ! $object->create($user) ){

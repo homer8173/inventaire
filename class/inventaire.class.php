@@ -118,7 +118,7 @@ class Inventaire extends CommonObject
 
         dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
-
+        return $resql;
         if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
 
         if (! $error)
@@ -150,12 +150,11 @@ class Inventaire extends CommonObject
                 $this->error.=($this->error?', '.$errmsg:$errmsg);
             }
             $this->db->rollback();
-            return  $error;
+            return  -1*$error;
         }
         else
         {
             $this->db->commit();
-            return  $resql;
             return $this->id;
 
         }
