@@ -117,8 +117,6 @@ class Inventaire extends CommonObject
 
         dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
-         $er=array($this->name,$this->entrepots,$this->statut,$this->date_created,$this->fk_user_created,$this->db);
-        return $er;
         if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
 
         if (! $error)
