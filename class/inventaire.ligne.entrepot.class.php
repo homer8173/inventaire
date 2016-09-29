@@ -43,11 +43,11 @@ class InventaireLigneEntrepot {
 			$this->origin_pmp,
 			$user->id
 			 )";
-        $this->db->begin();
-        $this->db->query($sql);
-        dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
-        $er= array($this->db,$this->fk_inventaire_line_id,$this->fk_entrepot_id);
-        return  $er ;//$this->db->query($sql);
+       $resq= $this->db->query($sql);
+        return $resq;
+        //dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
+
+
 
     }
 

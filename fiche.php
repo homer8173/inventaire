@@ -180,8 +180,7 @@ switch($action){
                         $Inventaireligneentrepot->origin_value = $row['stock'][$keid] - $somme_mouvement_stock;
                         $Inventaireligneentrepot->origin_pmp = $row['pmp'][$keid];
 
-                        var_dump($Inventaireligneentrepot->create($user));
-                        exit;
+                        $Inventaireligneentrepot->create($user);
                     }
                 }
 
