@@ -121,9 +121,9 @@ switch($action){
             if($row == 1 ) $ent[] = $key;
 
         $object->date_created = $date_inventaire;
-        $object->date_created  =implode(',', $ent);
+        $this->entrepots  =implode(',', $ent);
         $object->create($user);
-        var_dump($object->date_created ,$object->date_created ,$object->create($user));
+        var_dump($object->date_created ,$this->entrepots ,$object->create($user));
         exit;
 
         if( ! $object->create($user) ){
