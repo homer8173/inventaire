@@ -170,6 +170,7 @@ switch($action){
 // 				  $InventaireLine->origin_pmp = serialize($row['pmp']);
 
                     $lineid = $InventaireLine->create($user);
+                     echo $lineid."<br>";
 
                     foreach ($row['stock'] as $keid => $v) {
                         $somme_mouvement_stock = $Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now, $keid);
@@ -180,9 +181,10 @@ switch($action){
                         $Inventaireligneentrepot->origin_value = $row['stock'][$keid] - $somme_mouvement_stock;
                         $Inventaireligneentrepot->origin_pmp = $row['pmp'][$keid];
 
-                        $Inventaireligneentrepot->create($user);
+                        var_dump($Inventaireligneentrepot->create($user));
                     }
                 }
+                exit;
             }
 
 
