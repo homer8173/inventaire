@@ -381,12 +381,12 @@ class modInventaire extends DolibarrModules
 		$this->export_fields_array[$r]=array(
 			'i.row_id'=>"Inventaire id",
 			'i.ref'=>'Ref. invenataire',
-			'i.date_created'=>'Date Creation',
+			'i.date_created'=>'Date inventaire',
             'p.label'=>'Produit',
             'p.ref'=>'ref. produit',
-            'ide.value'=>'Stock Physique',
-            'ide.pmp'=>'PMP',
-            'e.label'=>'Entrepot',
+            'idp.reel'=>'Stock physique',
+            'idp.pmp'=>'PMP',
+
 		);
 
         /* TYPE FIELD ENTREPOT*/
@@ -401,18 +401,14 @@ class modInventaire extends DolibarrModules
             'i.date_created'=>'Date inventaire',
             'p.label'=>'produit',
             'p.ref'=>'ref. produit',
-            'ide.value'=>'Stock Physique',
-            'ide.pmp'=>'PMP',
-            'e.label'=>'Entrepot',
+            'idp.reel'=>'Stock Physique',
+            'idp.pmp'=>'PMP',
+
 
 		);
 		$this->export_sql_start[$r] = 'SELECT  ';
 		$this->export_sql_end[$r] = ' FROM ' . MAIN_DB_PREFIX . 'inventaire_name as i
 		  INNER JOIN '.MAIN_DB_PREFIX.'inventaire_app as idp ON (idp.k_inventaire_id=i.row_id) ';
-		$this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
-			. 'inventaire_entrepot as ide on (ide.fk_inventaire_line_id = idp.row_id) ';
-        $this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
-            . 'entrepot as e on (e.rowid = ide.fk_entrepot_id) ';
 		$this->export_sql_end[$r] .= ' INNER JOIN  ' . MAIN_DB_PREFIX
             . 'product as p on (p.rowid = idp.k_product_id) ';
         $this->export_sql_end[$r] .= ' WHERE 1 ';
