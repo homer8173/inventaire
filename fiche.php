@@ -153,7 +153,6 @@ switch($action){
 
                 $object->fix($user);
                 $tmpresult = $snaptshot->extractProducts($object->entrepots, $object->datec);
-
                 $InventaireLine= new InventaireApp($db);
                 $Inventaireligneentrepot= new InventaireLigneEntrepot($db);
 
@@ -170,7 +169,8 @@ switch($action){
 // 				  $InventaireLine->origin_pmp = serialize($row['pmp']);
 
                     $lineid = $InventaireLine->create($user);
-
+                        //var_dump($row['stock']);
+                    //die("essai ligne");
                     foreach ($row['stock'] as $keid => $v) {
                         $somme_mouvement_stock = $Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now, $keid);
                         $Inventaireligneentrepot->fk_inventaire_line_id = $lineid;
@@ -181,6 +181,7 @@ switch($action){
                         $Inventaireligneentrepot->origin_pmp = $row['pmp'][$keid];
 
                         $Inventaireligneentrepot->create($user);
+
                     }
                 }
 

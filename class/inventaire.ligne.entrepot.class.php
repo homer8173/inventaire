@@ -18,6 +18,7 @@ class InventaireLigneEntrepot {
     public $origin_pmp;
     public $fk_user_modified;
     public $date_modified;
+    public $table_element = "inventaire_entrepot";
 
     function __construct($db ){
         $this->db = $db;
@@ -25,7 +26,7 @@ class InventaireLigneEntrepot {
 
     public function create($user){
 
-        $sql= "INSERT INTO ".MAIN_DB_PREFIX."inventaire_entrepot (
+        $sql= "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element."(
 			fk_inventaire_line_id,
 			fk_entrepot_id,
 			value,
@@ -35,20 +36,17 @@ class InventaireLigneEntrepot {
 			fk_user_modified
 		)
 		VALUES (
-			$this->fk_inventaire_line_id,
-			$this->fk_entrepot_id,
-			$this->value,
-			$this->pmp,
-			$this->origin_value,
-			$this->origin_pmp,
-			$user->id
+			'".$this->fk_inventaire_line_id."',
+			'".$this->fk_entrepot_id."',
+			'".$this->value."',
+			'".$this->pmp."',
+			'".$this->origin_value."',
+			'".$this->origin_pmp."',
+			'".$user->id."'
 			 )";
-       $resq= $this->db->query($sql);
-        return $resq;
-        //dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
 
-
-
+        $resql=$this->db->query($sql);
+        return $resql;
     }
 
     public function update($user){
