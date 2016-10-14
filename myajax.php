@@ -67,7 +67,7 @@ if($object->fetch($id)){
                     $somme_mouvement_stock=$Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now);
                     $InventaireLine->k_product_id = $pid;
                     $InventaireLine->pmp = $row['ppmp'];
-                    $InventaireLine->stock_reel=$row['reel'] - $somme_mouvement_stock;
+                    $InventaireLine->stock_reel=$row['reel'];
 // 				  $InventaireLine->row_value = serialize($row['stock']);
 // 				  $InventaireLine->row_pmp = serialize($row['pmp']);
 // 				  $InventaireLine->origin_value = serialize($row['stock']);
