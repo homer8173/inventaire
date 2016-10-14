@@ -2,7 +2,6 @@
 
 function inventaire(me){
     //console.log("url",me.id);
-   jQuery('#'+me.id).css('display','none');
    jQuery
        .ajax({
            url:me.id,
@@ -11,8 +10,8 @@ function inventaire(me){
            success: function (data){
                console.log(data);
            },
-           errror: function (){
-               console.log(error);
+           error: function (){
+
            }
 
        });
@@ -28,7 +27,7 @@ function pmpConstitue(me){
             success: function (data){
                 console.log(data);
             },
-            errror: function (){
+            error: function (){
                 console.log(error);
             }
 

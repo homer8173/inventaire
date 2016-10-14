@@ -26,8 +26,10 @@ class Snapshot {
         global $conf;
 
 
-        $sql = "SELECT p.rowid as id, p.ref, p.label as produit, p.fk_product_type as type, p.pmp as ppmp, p.price, p.price_ttc, p.stock as reel,";
-        $sql.= " ps.pmp, ps.reel as value, fk_entrepot as entrepot";
+        $sql = "SELECT p.rowid as id, p.ref, p.label as produit, p.fk_product_type as type,p.price, p.price_ttc,";
+        $sql.= " ps.pmp, ps.reel as value, fk_entrepot as entrepot,";
+        $sql.= " (SELECT pmp.pmp from ".MAIN_DB_PREFIX."product_pmp as pmp where pmp.fk_product=p.rowid AND pmp.date_created <= '$date_inventaire' ORDER BY pmp.rowid DESC LIMIT 1) as ppmp,";
+        $sql.= " (SELECT pmp.stock from ".MAIN_DB_PREFIX."product_pmp as pmp where pmp.fk_product=p.rowid AND pmp.date_created <= '$date_inventaire' ORDER BY pmp.rowid DESC LIMIT 1) as reel";
         $sql.= " FROM  ".MAIN_DB_PREFIX."product p LEFT JOIN ".MAIN_DB_PREFIX."product_stock ps ON (ps.fk_product = p.rowid) ";
         $sql.= " INNER JOIN ".MAIN_DB_PREFIX."commande_fournisseurdet  cft ON (cft.fk_product=p.rowid) ";
         $sql.= " INNER JOIN ".MAIN_DB_PREFIX."commande_fournisseur  cf ON (cft.fk_commande=cf.rowid) ";

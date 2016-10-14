@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `llx_inventaire_entrepot` (
 `row_id` int(11)  unsigned AUTO_INCREMENT NOT NULL,
   `fk_inventaire_line_id` int(11) NOT NULL,
   `fk_entrepot_id` int(11) NOT NULL,
-  `pmp` float(10,6) NOT NULL,
+  `pmp` float(24,8) NOT NULL,
   `value` int(11) NOT NULL,
   `origin_value` int(11) NOT NULL,
   `origin_pmp` float(10,6) NOT NULL,
