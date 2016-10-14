@@ -238,11 +238,13 @@ switch ($action) {
 
         print '<div class="tabsAction">';
         $url = DOL_MAIN_URL_ROOT . '/inventaire/myajax.php?idinv=' . GETPOST('id');
+        $url2 = DOL_MAIN_URL_ROOT . '/inventaire/updatepmp.php?idinv=' . GETPOST('id');
         if ($object->statut < 2)
             print '<a id="' . $url . '" href="fiche.php?action=applied&amp;id=' . GETPOST('id') . '" class="butAction" onclick="inventaire(this)">' . $langs->trans("InventaireConfirmAppliedButton") . '</a>';
 
         if ($object->statut < 3)
             print '<a href="fiche.php?action=delete&amp;id=' . GETPOST('id') . '" class="butAction">' . $langs->trans("InventaireConfirmDeleteButton") . '</a>';
+        print '<a id="'. $url2 .'" href="#" class="butAction" onclick="pmpConstitue(this)">' . $langs->trans("InventaireConfirmAppliedButton") . '</a>';
         print '</div>';
 
 
