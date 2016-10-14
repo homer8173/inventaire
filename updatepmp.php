@@ -33,15 +33,16 @@ $product= $_pmp->extractProducts();
 
 foreach ($product as $pr) {
     $id= (int) $pr['id'];
+    $pmp_unit= new ReconstituePmp($db);
     $data_mv=$_pmp->getStockMouvement($id);
     if(count($data_mv)>0){
         foreach($data_mv as $mv){
             if($mv['value']>0 && $mv['price']>0){
-                $_pmp->calculatePmp($mv['value'], $mv['price']);
+                $pmp_unit->calculatePmp($mv['value'], $mv['price']);
             }else {
-                $_pmp->stock= $_pmp->stock + $mv['value'];
+                $pmp_unit->stock= $pmp_unit->stock + $mv['value'];
             }
-         $result=$_pmp->insertPmp($mv['fk_product'], $_pmp->pmp, $_pmp->stock, $mv['tms']);
+         $result=$pmp_unit->insertPmp($mv['fk_product'], $pmp_unit->pmp, $pmp_unit->stock, $mv['tms']);
         }
     }
 
