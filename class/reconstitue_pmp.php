@@ -94,9 +94,8 @@ class ReconstituePmp
     function extractProducts(){
         global $conf;
 
-        $sql = "SELECT p.rowid as id, p.ref, p.label as produit, p.fk_product_type as type, p.pmp as ppmp, p.price, p.price_ttc, p.stock as reel,";
-        $sql.= " ps.pmp, ps.reel as value, fk_entrepot as entrepot";
-        $sql.= " FROM  ".MAIN_DB_PREFIX."product p LEFT JOIN ".MAIN_DB_PREFIX."product_stock ps ON (ps.fk_product = p.rowid) ";
+        $sql = "SELECT p.rowid as id, p.ref, p.label as produit, p.fk_product_type as type, p.pmp as ppmp, p.price, p.price_ttc, p.stock as reel";
+        $sql.= " FROM  ".MAIN_DB_PREFIX."product p ";
         $sql.= " WHERE 1 ";
 
         /*$ent = array();
