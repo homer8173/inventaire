@@ -48,7 +48,7 @@ $entrepot = $Entrepot->listAll();
 
 
  $data= array();
-$data['id']=$id=GETPOST('idinv','int');
+$data['message']='';
 $id=GETPOST('idinv','int');
 if($object->fetch($id)){
             $_dateobjNow= new DateTime('now');
@@ -68,14 +68,8 @@ if($object->fetch($id)){
                     $InventaireLine->k_product_id = $pid;
                     $InventaireLine->pmp = $row['ppmp'];
                     $InventaireLine->stock_reel=$row['reel'];
-// 				  $InventaireLine->row_value = serialize($row['stock']);
-// 				  $InventaireLine->row_pmp = serialize($row['pmp']);
-// 				  $InventaireLine->origin_value = serialize($row['stock']);
-// 				  $InventaireLine->origin_pmp = serialize($row['pmp']);
-
                     $lineid = $InventaireLine->create($user);
-                        //var_dump($row['stock']);
-                    //die("essai ligne");
+
                     foreach ($row['stock'] as $keid => $v) {
                         $somme_mouvement_stock = $Inventaireligneentrepot->sommeStock($pid, $date_inventaire, $date_now, $keid);
                         $Inventaireligneentrepot->fk_inventaire_line_id = $lineid;
@@ -91,6 +85,9 @@ if($object->fetch($id)){
                 }
 
             }
+    if(strtotime($date_inventaire) > strtotime($date_now)) {
+        $data['message'] = 'Inventaire pas encore disponible à cette date!';
+    }
 
 
 

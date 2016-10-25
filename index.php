@@ -104,5 +104,6 @@ print_fiche_titre($langs->trans("InventaireArea"));
 
 dol_include_once('/inventaire/tpl/index.liste.tpl');
 
+
 // End of page
 llxFooter();
