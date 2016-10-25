@@ -240,7 +240,7 @@ switch ($action) {
         $url = DOL_MAIN_URL_ROOT . '/inventaire/myajax.php?idinv=' . GETPOST('id');
         $url_redirect = DOL_MAIN_URL_ROOT . '/inventaire/fiche.php?id=' . GETPOST('id');
 
-         print '<p id="chargement-inv" style=" display:none;text-align:center; color:green">Chargement en cours ...</p>';
+         print '<p id="chargement-inv" style=" display:none;text-align:center; color:green">  <img src="'.DOL_MAIN_URL_ROOT.'/inventaire/img/loading.gif" alt="..." ></p>';
         if ($object->statut < 2)
             print '<a id="applied-inv" data-url="' . $url . '" data-redirection="'.$url_redirect.'" href="#" class="butAction" onclick="inventaire(this)">' . $langs->trans("InventaireConfirmAppliedButton") . '</a>';
 

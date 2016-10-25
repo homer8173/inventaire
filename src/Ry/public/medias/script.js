@@ -5,7 +5,6 @@ function inventaire(me){
     var url = jQuery(me).attr('data-url');
     var url_redirection = jQuery(me).attr('data-redirection');
     jQuery("#chargement-inv").show();
-    jQuery("#chargement-inv").text('Chargement terminé');
 
    jQuery
        .ajax({
